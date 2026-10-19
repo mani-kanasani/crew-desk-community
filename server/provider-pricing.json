@@ -1,0 +1,67 @@
+{
+  "_about": "Reviewed provider price cards and reservation policy for paid Crew Desk lanes. Rates are USD per 1,000,000 tokens from primary provider documentation checked 2026-09-21. Estimates computed from these rates are not provider billing; reconcile against provider usage or balance changes. contextBoundTokens is a practical per-call bound: workers auto-compact at autoCompactWindowTokens and Crew Desk stops a worker if one call exceeds the bound. It is not a provider-enforced cap.",
+  "deepseek": {
+    "perTaskMaxUsd": 2,
+    "defaultTargetUsd": 0.4,
+    "maxOutputTokensPerCall": 16000,
+    "headroomCalls": 2,
+    "contextBoundTokens": 262144,
+    "autoCompactWindowTokens": 200000,
+    "models": {
+      "deepseek-flash": {
+        "status": "verified",
+        "currency": "USD",
+        "inputPerMTok": 0.3,
+        "cacheReadPerMTok": 0.006,
+        "cacheWritePerMTok": null,
+        "outputPerMTok": 1.2,
+        "contextWindowTokens": 1048576,
+        "maxOutputTokens": 393216,
+        "aliases": [
+          "deepseek-flash[1m]",
+          "deepseek-v4.1-flash",
+          "deepseek-v4-flash"
+        ],
+        "reportedModelAliases": [],
+        "sources": [
+          "https://api-docs.deepseek.com/quick_start/pricing",
+          "https://api-docs.deepseek.com/news/news260910",
+          "https://api-docs.deepseek.com/guides/anthropic_api"
+        ],
+        "checkedAt": "2026-09-21",
+        "notes": "DeepSeek-V4.1-Flash. Peak rates used (cache miss 0.30, cache hit 0.006, output 1.20); off-peak is half. No cache-write price is published, so cache writes are priced at the uncached input rate. The English page is USD; the account may hold CNY, so confirm currency before converting balance changes. On the Anthropic endpoint, claude-opus* model names bill as deepseek-v4-pro: every Claude Code model variable is pinned to deepseek-flash. Anthropic-endpoint usage field names are undocumented: verify on the first run."
+      }
+    }
+  },
+  "kimi": {
+    "perTaskMaxUsd": 10,
+    "defaultTargetUsd": 3,
+    "maxOutputTokensPerCall": 16000,
+    "headroomCalls": 2,
+    "contextBoundTokens": 262144,
+    "autoCompactWindowTokens": 200000,
+    "models": {
+      "kimi-k3": {
+        "status": "verified",
+        "currency": "USD",
+        "inputPerMTok": 3,
+        "cacheReadPerMTok": 0.3,
+        "cacheWritePerMTok": 6,
+        "outputPerMTok": 15,
+        "contextWindowTokens": 1048576,
+        "aliases": [
+          "kimi-k3[1m]"
+        ],
+        "reportedModelAliases": [],
+        "sources": [
+          "https://platform.kimi.ai/docs/pricing/chat",
+          "https://platform.kimi.ai/docs/api/messages",
+          "https://platform.kimi.ai/docs/guide/kimi-k3-quickstart",
+          "https://code.claude.com/docs/en/model-config"
+        ],
+        "checkedAt": "2026-09-21",
+        "notes": "Flat pricing across the 1,048,576-token window; [1m] is a Claude Code suffix stripped before sending. Cache writes are priced at the 1-hour rate (6.00; the 5-minute rate is 3.00) so estimates are upper bounds. Output includes reasoning tokens; effort max adds tokens, not a surcharge. Kimi writes cache only for top-level cache_control, so Claude Code traffic may be billed mostly as uncached input. Prices exclude tax."
+      }
+    }
+  }
+}
